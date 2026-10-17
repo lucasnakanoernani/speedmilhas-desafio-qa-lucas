@@ -17,6 +17,17 @@
 
 **Resultado:** ambiente disponível para iniciar os testes planejados.
 
+### 17/10/2026 — Elaboração do plano de testes
+
+- **Tempo de trabalho ativo:** 40 minutos.
+**Atividades realizadas:** 
+
+- Identificação e priorização dos riscos
+- Definição da cobertura manual e automatizada e consolidação
+  do PLANO.md, incluindo os fluxos de somente ida e ida e volta.
+
+**Resultado:** plano de testes elaborado.
+
 ## Como rodar a automação
 
 ```bash
