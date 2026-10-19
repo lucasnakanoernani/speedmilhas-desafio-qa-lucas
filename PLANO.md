@@ -5,8 +5,8 @@
 1. **Exposição de dados entre agências:** permitir que uma agência
    consulte reservas ou informações de clientes de outra.
 
-2. **Reservas duplicadas:** criar mais de uma reserva ao reenviar
-   uma solicitação com a mesma chave de idempotência.
+2. **Reservas duplicadas:** uma repetição da mesma solicitação gerar 
+   uma nova reserva, em vez de retornar a reserva já existente.
 
 3. **Cobrança incorreta:** calcular ou arredondar incorretamente
    as taxas e o total, ou apresentar valores diferentes
@@ -169,7 +169,5 @@ da cobertura planejada.
   pontos de atenção ou dúvidas de requisito.
 - Registrar cenários executados, resultados, tempo real
   e pendências no QA_NOTES.md.
-
-Este documento representa a cobertura planejada.
-A execução e eventuais ajustes serão registrados conforme
-os achados e o tempo disponível.
+- Incluir a busca com datas invertidas na cobertura de validação,
+  relacionada ao BUG-03 e à regra 1.2 da SPEC.
