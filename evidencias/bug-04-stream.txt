@@ -1,0 +1,24 @@
+RESPOSTA DA BUSCA: 
+event: progresso
+id: 1
+data: {"concluidos":1,"total":3}
+
+event: ofertas
+id: 2
+data: {"quotes":[{"id":"c1626768-4422-4a73-a19e-8e42a6fbb6bd","supplier":"C","carrier":"LATAM","carrierCode":"LA","miles":23500,"taxesBrl":null,"serviceFeeBrl":null,"totalBrl":null,"currency":"BRL","bookable":false,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":0},{"id":"31c71bad-6244-4a19-bb55-94989114fe82","supplier":"C","carrier":"LATAM","carrierCode":"LA","miles":25500,"taxesBrl":203.39,"serviceFeeBrl":14.24,"totalBrl":217.63,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":1}]}
+
+event: progresso
+id: 3
+data: {"concluidos":2,"total":3}
+
+event: ofertas
+id: 4
+data: {"quotes":[{"id":"047943d7-08a0-45f2-ae47-6c80180e9a71","supplier":"A","carrier":"LATAM","carrierCode":"LA","miles":19000,"taxesBrl":185.76,"serviceFeeBrl":13,"totalBrl":198.76,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":0},{"id":"01f54965-012f-47dd-a8d8-51abf9dffa9d","supplier":"A","carrier":"AZUL","carrierCode":"AD","miles":20500,"taxesBrl":129.92,"serviceFeeBrl":9.09,"totalBrl":139.01,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":1},{"id":"13755a13-7d94-4322-a34a-56426692198f","supplier":"A","carrier":"AZUL","carrierCode":"AD","miles":21000,"taxesBrl":50.1,"serviceFeeBrl":3.51,"totalBrl":53.61,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":2},{"id":"a3744ffb-8d23-4623-af7c-b50b9c2b2c96","supplier":"A","carrier":"LATAM","carrierCode":"LA","miles":28000,"taxesBrl":136.04,"serviceFeeBrl":9.52,"totalBrl":145.56,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z","supplierIndex":3}]}
+
+event: progresso
+id: 5
+data: {"concluidos":3,"total":3}
+
+event: done
+id: 6
+data: {"searchId":"f3d1b63e-6cd9-407b-ae14-8b619a324cc1","query":{"origin":"BSB","destination":"SSA","date":"2026-10-29"},"status":"partial","cached":false,"cachedAt":null,"elapsedMs":257,"quotes":[{"id":"047943d7-08a0-45f2-ae47-6c80180e9a71","supplier":"A","carrier":"LATAM","carrierCode":"LA","miles":19000,"taxesBrl":185.76,"serviceFeeBrl":13,"totalBrl":198.76,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z"},{"id":"01f54965-012f-47dd-a8d8-51abf9dffa9d","supplier":"A","carrier":"AZUL","carrierCode":"AD","miles":20500,"taxesBrl":129.92,"serviceFeeBrl":9.09,"totalBrl":139.01,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z"},{"id":"13755a13-7d94-4322-a34a-56426692198f","supplier":"A","carrier":"AZUL","carrierCode":"AD","miles":21000,"taxesBrl":50.1,"serviceFeeBrl":3.51,"totalBrl":53.61,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z"},{"id":"c1626768-4422-4a73-a19e-8e42a6fbb6bd","supplier":"C","carrier":"LATAM","carrierCode":"LA","miles":23500,"taxesBrl":null,"serviceFeeBrl":null,"totalBrl":null,"currency":"BRL","bookable":false,"expiresAt":"2026-10-20T02:28:31.971Z"},{"id":"31c71bad-6244-4a19-bb55-94989114fe82","supplier":"C","carrier":"LATAM","carrierCode":"LA","miles":25500,"taxesBrl":203.39,"serviceFeeBrl":14.24,"totalBrl":217.63,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z"},{"id":"a3744ffb-8d23-4623-af7c-b50b9c2b2c96","supplier":"A","carrier":"LATAM","carrierCode":"LA","miles":28000,"taxesBrl":136.04,"serviceFeeBrl":9.52,"totalBrl":145.56,"currency":"BRL","bookable":true,"expiresAt":"2026-10-20T02:28:31.971Z"}],"suppliers":[{"code":"A","name":"Fornecedor A","status":"ok","quotes":4,"discarded":0,"elapsedMs":244,"attempts":1,"message":null},{"code":"B","name":"Fornecedor B","status":"error","quotes":0,"discarded":0,"elapsedMs":3,"attempts":1,"message":"falha interna"},{"code":"C","name":"Fornecedor C","status":"ok","quotes":2,"discarded":0,"elapsedMs":32,"attempts":1,"message":null}]}

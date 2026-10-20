@@ -1,9 +1,17 @@
-# Revisão do PR `feature/cupom-desconto`
+# Revisão do PR — Cupom de desconto na reserva
 
-<!-- Opcional se você comentou direto no PR. Separe o que bloqueia o merge do que é sugestão. -->
+## Status
 
-## Bloqueia o merge
+Não concluída dentro do tempo disponível.
 
-## Sugestões
+## Justificativa
 
-## Veredito
+Priorizei a elaboração do plano, a exploração da aplicação, a investigação e o registro dos bugs e a construção dos testes automatizados de interface e API.
+
+Conforme a orientação do e-mail do desafio sobre encerrar o trabalho ao ultrapassar quatro horas e explicar as pendências, registro a revisão da branch `feature/cupom-desconto` como uma entrega não concluída.
+
+## Próximo passo
+
+Ler a descrição em `docs/PR-cupom-desconto.md`, comparar as alterações da branch com `main` e registrar os pontos que bloqueiam o merge e as sugestões de melhoria.
+
+Não emito parecer de aprovação ou reprovação do PR nesta entrega.

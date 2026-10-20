@@ -120,7 +120,7 @@ o identificador da Beta, ainda será testada.
 ![Agência selecionada, reserva e requisição](evidencias/bug-02-reserva_requisicao.png)
 
 
-## BUG-03 — Busca aceita volta anterior à ida, sem aviso ao usuário
+## BUG-03 — Busca na aceita volta anterior à ida, sem aviso ao usuário
 
 - **Local afetado:** formulário de busca de ida e volta.
 - **Ambiente:** aplicação local, branch main, Google Chrome.
@@ -173,3 +173,169 @@ não foi estabelecida neste registro.
 
 ![Datas invertidas na busca](evidencias/bug-03-datas.png)
 
+## BUG-04 — Busca oculta ofertas quando um fornecedor falha
+
+- **Local afetado:** resultados da busca.
+- **Ambiente:** aplicação local, branch main, Chrome.
+- **Gravidade sugerida:** alta.
+- **Regra relacionada:** em caso de falha parcial dos fornecedores,
+  manter as ofertas disponíveis e apresentar o aviso
+  “Pode haver mais opções para esta data.”
+- **Status:** reproduzido por automação E2E.
+
+### Pré-condições e dados
+
+- Mock com fornecedor B configurado para falhar.
+- Fornecedor C configurado no modo de taxa nula.
+- Agência: Alfa Turismo.
+- Modalidade: somente ida.
+- Origem: BSB.
+- Destino: SSA.
+- Data: 29/10/2026.
+
+### Passos para reproduzir
+
+1. Restaurar o mock usando POST /admin/reset.
+2. Configurar a falha com POST /admin/force-fail/supplier-b.
+3. Configurar C com POST /admin/force-dirty/supplier-c?mode=null.
+4. Abrir a aplicação e preencher os dados informados.
+5. Executar a busca.
+6. Comparar a resposta de /search/stream com o resultado da tela.
+
+### Resultado esperado
+
+Exibir as ofertas retornadas pelos fornecedores disponíveis
+e o aviso “Pode haver mais opções para esta data.”
+
+Ofertas com taxa não informada devem aparecer sem permitir reserva.
+
+### Resultado obtido
+
+A resposta da API apresenta status partial e seis ofertas:
+quatro do fornecedor A e duas do fornecedor C.
+Cinco ofertas possuem bookable: true.
+Somente o fornecedor B apresenta status error.
+
+Entretanto, a interface exibe “Nenhuma oferta disponível agora”,
+sem apresentar as ofertas nem o aviso de resultado parcial.
+
+### Impacto
+
+O usuário deixa de visualizar e reservar ofertas disponíveis
+quando apenas um fornecedor apresenta falha.
+
+### Evidências
+
+- Resposta da busca com status partial e ofertas disponíveis:
+  [Resposta de /search/stream](evidencias/bug-04-stream.txt).
+
+- Interface apresentando indisponibilidade:
+
+![Tela da busca com mensagem de indisponibilidade](evidencias/bug-04-tela.png)
+
+### Limpeza
+
+Restaurar o mock usando POST /admin/reset.
+
+## BUG-05 — Reserva sem nome do passageiro retorna erro 500
+
+- **Local afetado:** POST /orders.
+- **Ambiente:** aplicação local, branch main.
+- **Gravidade sugerida:** média.
+- **Regra relacionada:** o nome do passageiro é obrigatório;
+  pedidos inválidos devem retornar 400 com mensagem explicativa,
+  nunca 500.
+- **Status:** reproduzido por teste automatizado de API.
+
+### Pré-condições
+
+- Oferta válida e reservável obtida em POST /search.
+- Agência informada no header x-client-id: alfa-turismo.
+- Chave de idempotência nova.
+
+### Passos para reproduzir
+
+1. Buscar uma oferta reservável.
+2. Enviar POST /orders com o quoteId dessa oferta,
+   uma nova idempotencyKey e passageiro: {}.
+3. Conferir o status e o corpo da resposta.
+
+### Resultado esperado
+
+Status 400 com mensagem informando a obrigatoriedade
+do nome do passageiro.
+
+### Resultado obtido
+
+Status 500 com o corpo:
+
+{
+  "error": {
+    "code": "INTERNAL_ERROR",
+    "message": "Erro interno"
+  }
+}
+
+### Impacto
+
+Uma entrada inválida provoca erro interno e não orienta
+o consumidor da API sobre o campo obrigatório ausente.
+
+### Evidências
+
+Saída do terminal e trace do teste
+“Recusar reserva sem nome do passageiro”.
+
+## BUG-06 — API permite consultar reserva de outra agência
+
+- **Local afetado:** GET /orders/:id.
+- **Ambiente:** aplicação local, branch main.
+- **Gravidade sugerida:** alta.
+- **Regra relacionada:** uma agência só consulta as próprias
+  reservas; consultar uma reserva de outra agência deve retornar 404.
+- **Status:** confirmado por teste automatizado de API.
+
+### Pré-condições e dados
+
+- Agência proprietária: alfa-turismo.
+- Agência enviada na consulta: beta-viagens.
+- ID da reserva: 3419c148-925e-4371-a249-ad368a648149.
+- Passageiro: Teste Isolamento QA.
+
+### Passos para reproduzir
+
+1. Criar uma reserva com x-client-id: alfa-turismo.
+2. Consultar a reserva com o mesmo cabeçalho e confirmar status 200.
+3. Consultar GET /orders/3419c148-925e-4371-a249-ad368a648149
+   enviando x-client-id: beta-viagens.
+4. Conferir o status e os dados retornados.
+
+Para novas execuções, criar uma reserva e utilizar seu ID.
+
+### Resultado esperado
+
+Retornar status 404, sem apresentar dados da reserva da Alfa.
+
+### Resultado obtido
+
+A API retorna status 200 e os dados da reserva pertencente à Alfa,
+mesmo recebendo x-client-id: beta-viagens.
+
+O corpo da resposta contém clientId: alfa-turismo,
+nome do passageiro, trecho e valores da reserva.
+
+### Impacto
+
+Uma agência consegue consultar dados de reservas e passageiros
+de outra agência conhecendo o identificador da reserva.
+
+### Evidências
+
+Log e trace do teste automatizado:
+“Impedir que Beta consulte uma reserva da Alfa”.
+
+### Relação com BUG-02
+
+O BUG-02 registra o comportamento observado pela interface.
+Este registro demonstra o acesso diretamente pela API,
+enviando explicitamente a identificação da Beta.
